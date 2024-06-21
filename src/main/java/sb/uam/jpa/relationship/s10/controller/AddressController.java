@@ -23,4 +23,13 @@ public class AddressController {
                 .orElseGet(() -> ResponseEntity.notFound()
                         .build()); // Devolvemos un ResponseEntity con el status correspondiente.
     }
+
+    @DeleteMapping("/remove/{idAddress}/{idClient}")
+    public ResponseEntity<Object> removeAddress(@PathVariable Long idAddress, @PathVariable Long idClient){
+        Optional<Object> removedAddress = addressService.removeAddress(idAddress, idClient); // removedAddress nos va a permitir saber si se elimino la direccion o no.
+        return removedAddress
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound()
+                        .build()); // Devolvemos un ResponseEntity con el status correspondiente.
+    }
 }

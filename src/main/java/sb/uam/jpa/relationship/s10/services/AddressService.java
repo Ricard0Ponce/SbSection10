@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface AddressService {
     Optional<Address> createAddress(Long id, Address address);
+    Optional<Object> removeAddress(Long idAdress, Long idClient);
 }
