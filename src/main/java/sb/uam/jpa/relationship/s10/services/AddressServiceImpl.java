@@ -35,7 +35,7 @@ public class AddressServiceImpl implements AddressService{
     @Transactional
     public Optional<Object> removeAddress(Long idAdress, Long idClient) {
         Optional<Client> clientOpt = clientRepository.findById(idClient); // Buscamos el cliente por el id que recibimos
-        if(clientOpt.isPresent()){
+        if(clientOpt.isPresent()) {
             Client client = clientOpt.get(); // Creamos un objeto cliente con el cliente que encontramos asignandolo a la variable client
             Optional<Address> addressOpt = client.getAddresses()
                     .stream()
@@ -44,9 +44,9 @@ public class AddressServiceImpl implements AddressService{
                 Address address = addressOpt.get(); // Creamos un objeto direccion con la direccion que encontramos asignandolo a la variable address
                 client.getAddresses().remove(address); // Eliminamos la direccion del cliente
                 addressRepository.delete(address); // Eliminamos la direccion
-                return Optional.of(address); // Retornamos la direccion
-            }
-        }
+                return Optional.of(address); // Retornamos la direccion que fue eliminada
+            }  // Termina if de addressOpt
+        } // Termina if de clientOpt
         return Optional.empty();
     }
 }
